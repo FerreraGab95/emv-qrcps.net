@@ -1,17 +1,11 @@
-This library was made to help people that are using NodeJS to generate and parse EMV QRcode according with the specifications:
+This library is a port of the steplix/emv-qrcps [library](https://github.com/steplix/emv-qrcps#readme) library which is a fork of Emmanuel Kiametis [library](https://www.npmjs.com/package/emv-qrcps) to the .NET platform.
+
+Basically the implementation is the same, so the tutorial below has been copied and adapted for use in C#.
+
+This library was made to help people that to generate and parse EMV QRcode according with the specifications:
 
 - Merchant [Specification](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Merchant-Presented-QR-Specification-v1-1.pdf)
-- Consumer [Specification](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Consumer-Presented-QR-Specification-v1-1.pdf)
-
-It is a fork of Emmanuel Kiametis [library](https://www.npmjs.com/package/emv-qrcps). 
-
-This version fixes the CRC generated in cases where the resulting code is less than 4 digits long.
-
-# Installing
-
-```
-npm install steplix-emv-qrcps
-```
+- Consumer [Specification](https://www.emvco.com/wp-content/plugins/pmpro-customizations/oy-getfile.php?u=/wp-content/uploads/documents/EMVCo-Consumer-Presented-QR-Specification-v1-1.pdf) 
 
 # Modules
 
@@ -25,35 +19,34 @@ There are 2 modules in this library.
 You can use this Module by importing:
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
+using emv_qrcps.QrCode.Merchant;
 ```
 
-### Methods
+### Instances
 
-#### buildTLV
+#### TLV
 
 ```
-const TLV = Merchant.buildTLV(tag, length, value);
+TLV tlv = new TLV(tag, length, value);
 ```
 
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `tag` | Payload Format Indicator | **string** |
-| `length` | Point of Initiation Method | **number** |
+| `length` | Point of Initiation Method | **int** |
 | `value` | Merchant Account Information | **string** |
 
-| Return Type | Description |
-| ------ | ------ |
 | `TLV` | It means an object that stores a **Tag** + **Lenght** + **Value**. |
 
-#### buildEMVQR
+#### EMVQR
 
 ```
-const EMVQR = Merchant.buildEMVQR();
+EMVQR emvqr = new EMVQR();
 
 // ... OR
 
-const EMVQR = Merchant.buildEMVQR(
+EMVQR emvq = new EMVQR()
+{
     payloadFormatIndicator,
     pointOfInitiationMethod,
     merchantAccountInformation,
@@ -72,14 +65,14 @@ const EMVQR = Merchant.buildEMVQR(
     merchantInformationLanguageTemplate,
     rfuForEMVCo,
     unreservedTemplates,
-);
+};
 ```
 
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `payloadFormatIndicator` | Payload Format Indicator | **TLV** |
 | `pointOfInitiationMethod` | Point of Initiation Method | **TLV** |
-| `merchantAccountInformation` | Merchant Account Information | **map [ id(string) : MerchantAccountInformation ]** |
+| `merchantAccountInformation` | Merchant Account Information | **Dictionary<string, MerchantAccountInformation>** |
 | `merchantCategoryCode` | Merchant Category Code | **TLV** |
 | `transactionCurrency` | Transaction Currency | **TLV** |
 | `transactionAmount` | Transaction Amount | **TLV** |
@@ -93,21 +86,22 @@ const EMVQR = Merchant.buildEMVQR(
 | `additionalDataFieldTemplate` | Additional Data Field Template | **AdditionalDataFieldTemplate** |
 | `crc` | CRC | **TLV** |
 | `merchantInformationLanguageTemplate` | Merchant Information - Language Template | **MerchantInformationLanguageTemplate** |
-| `rfuForEMVCo` | RFU for EMVCo | **array [ TLV ]** |
-| `unreservedTemplates` | Unreserved Templates | **map [ id(string) : UnreservedTemplate ]** |
+| `rfuForEMVCo` | RFU for EMVCo | **TLV[]** |
+| `unreservedTemplates` | Unreserved Templates | **Dictionary<string, UnreservedTemplate>** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `EMVQR` | It means an object that represents an EMV QRCode. |
 
-#### buildAdditionalDataFieldTemplate
+#### AdditionalDataFieldTemplate
 
 ```
-const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate();
+AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
 
 // ... OR
 
-const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate(
+AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate()
+{
     billNumber,
     mobileNumber,
     storeLabel,
@@ -119,7 +113,7 @@ const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate(
     additionalConsumerDataRequest,
     rfuForEMVCo,
     paymentSystemSpecific
-);
+};
 ```
 
 | Parameter | Description | Type |
@@ -133,21 +127,22 @@ const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate(
 | `terminalLabel` | Terminal Label | **TLV** |
 | `purposeTransaction` | Purpose of Transaction | **TLV** |
 | `additionalConsumerDataRequest` | Additional Consumer Data Request | **TLV** |
-| `rfuForEMVCo` | RFU for EMVCo | **array [ TLV ]** |
-| `paymentSystemSpecific` | Payment System specific templates | **map [ id(string) : PaymentSystemSpecific ]** |
+| `rfuForEMVCo` | RFU for EMVCo | **TLV[]** |
+| `paymentSystemSpecific` | Payment System specific templates | **Dictionary<string, PaymentSystemSpecific>** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `AdditionalDataFieldTemplate` | It means an object that represents an additional data field template. |
 
-#### buildMerchantInformationLanguageTemplate
+#### MerchantInformationLanguageTemplate
 
 ```
-const merchantInformationLanguageTemplate = Merchant.buildMerchantInformationLanguageTemplate();
+MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
 
 // ... OR
 
-const merchantInformationLanguageTemplate = Merchant.buildMerchantInformationLanguageTemplate(
+MerchantInformationLanguageTemplate merchantInformationLanguageTemplate =new MerchantInformationLanguageTemplate()
+{
     languagePreference,
     merchantName,
     merchantCity,
