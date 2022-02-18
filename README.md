@@ -46,7 +46,7 @@ EMVQR emvqr = new EMVQR();
 // ... OR
 
 EMVQR emvq = new EMVQR()
-{
+(
     payloadFormatIndicator,
     pointOfInitiationMethod,
     merchantAccountInformation,
@@ -65,7 +65,7 @@ EMVQR emvq = new EMVQR()
     merchantInformationLanguageTemplate,
     rfuForEMVCo,
     unreservedTemplates,
-};
+);
 ```
 
 | Parameter | Description | Type |
@@ -100,8 +100,8 @@ AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFiel
 
 // ... OR
 
-AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate()
-{
+AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate
+(
     billNumber,
     mobileNumber,
     storeLabel,
@@ -113,7 +113,7 @@ AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFiel
     additionalConsumerDataRequest,
     rfuForEMVCo,
     paymentSystemSpecific
-};
+);
 ```
 
 | Parameter | Description | Type |
@@ -141,8 +141,8 @@ MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new Me
 
 // ... OR
 
-MerchantInformationLanguageTemplate merchantInformationLanguageTemplate =new MerchantInformationLanguageTemplate()
-{
+MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate
+(
     languagePreference,
     merchantName,
     merchantCity,
@@ -155,20 +155,20 @@ MerchantInformationLanguageTemplate merchantInformationLanguageTemplate =new Mer
 | `languagePreference` | Language Preference | **TLV** |
 | `merchantName` | Name of the merchant | **TLV** |
 | `merchantCity` | Name of the marchant city | **TLV** |
-| `rfuForEMVCo` | RFU for EMVCo | **array [ TLV ]** |
+| `rfuForEMVCo` | RFU for EMVCo | **TLV[]** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `MerchantInformationLanguageTemplate` | It means an object that represents a merchant information language template. |
 
-#### buildMerchantAccountInformation
+#### MerchantAccountInformation
 
 ```
-const merchantAccountInformation = Merchant.buildMerchantAccountInformation();
+MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
 
 // ... OR
 
-const merchantAccountInformation = Merchant.buildMerchantAccountInformation(
+MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation(
     globallyUniqueIdentifier,
     paymentNetworkSpecific,
 );
@@ -177,20 +177,21 @@ const merchantAccountInformation = Merchant.buildMerchantAccountInformation(
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `globallyUniqueIdentifier` | Globally unique identifier | **TLV** |
-| `paymentNetworkSpecific` | Array of payment network specific | **array [ TLV ]** |
+| `paymentNetworkSpecific` | Array of payment network specific | **TLV[]** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `MerchantAccountInformation` | It means an object that represents a merchant account information. |
 
-#### buildUnreservedTemplate
+#### UnreservedTemplate
 
 ```
-const unreservedTemplate = Merchant.buildUnreservedTemplate();
+UnreservedTemplate unreservedTemplate =  new UnreservedTemplate();
 
 // ... OR
 
-const unreservedTemplate = Merchant.buildUnreservedTemplate(
+UnreservedTemplate unreservedTemplate =  new UnreservedTemplate
+(
     globallyUniqueIdentifier,
     paymentNetworkSpecific,
 );
@@ -199,7 +200,7 @@ const unreservedTemplate = Merchant.buildUnreservedTemplate(
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `globallyUniqueIdentifier` | Globally unique identifier | **TLV** |
-| `contextSpecificData` | Array of context of specific data | **array [ TLV ]** |
+| `contextSpecificData` | Array of context of specific data | **TLV[]** |
 
 | Return Type | Description |
 | ------ | ------ |
@@ -213,22 +214,21 @@ const unreservedTemplate = Merchant.buildUnreservedTemplate(
 Represents a **TAG** + **Length** + **Value**.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const tag = "01";
-const value = "Example";
-const length = value.length;
+string tag = "01";
+string value = "Example";
+int length = value.Length;
 
-const TLV = Merchant.buildTLV(tag, length, value);
+TLV tlv = new TLV(tag, length, value);
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const tlvStringFormat = TLV.toString();
+string tlvStringFormat = TLV.ToString();
 ```
 
 
@@ -236,19 +236,19 @@ const tlvStringFormat = TLV.toString();
 | ------ | ------ |
 | `string` | TLV in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const tlvBinaryFormat = TLV.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string tlvBinaryFormat = TLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const tlvRawFormat = TLV.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string tlvRawFormat = TLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -260,18 +260,17 @@ const tlvRawFormat = TLV.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
 Represents a merchant account information.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const merchantAccountInformation = Merchant.buildMerchantAccountInformation();
+MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const merchantAccountInformationStringFormat = merchantAccountInformation.toString();
+string merchantAccountInformationStringFormat = merchantAccountInformation.ToString();
 ```
 
 
@@ -279,44 +278,45 @@ const merchantAccountInformationStringFormat = merchantAccountInformation.toStri
 | ------ | ------ |
 | `string` | MerchantAccountInformation in TLV string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const merchantAccountInformationBinaryFormat = merchantAccountInformation.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string merchantAccountInformationBinaryFormat = merchantAccountInformation.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const merchantAccountInformationRawFormat = merchantAccountInformation.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string merchantAccountInformationRawFormat = merchantAccountInformation.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | MerchantAccountInformation in TLV binary OR TLV raw data format |
 
-###### setGloballyUniqueIdentifier
+###### SetGloballyUniqueIdentifier
 
 ```
-const value = "15600000000";
+string value = "15600000000";
 
-merchantAccountInformation.setGloballyUniqueIdentifier(value);
+merchantAccountInformation.SetGloballyUniqueIdentifier(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### addPaymentNetworkSpecific
+###### AddPaymentNetworkSpecific ( Replaced by AddContextSpecificData)
 
 ```
-const id = "03";
-const value = "12345678";
+string id = "03";
+string value = "12345678";
 
-merchantAccountInformation.addPaymentNetworkSpecific(id, value);
+//merchantAccountInformation.AddPaymentNetworkSpecific(id, value);
+merchantAccountInformation.AddContextSpecificData(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -329,18 +329,17 @@ merchantAccountInformation.addPaymentNetworkSpecific(id, value);
 Represents a merchant information language template.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const merchantInformationLanguageTemplate = Merchant.buildMerchantInformationLanguageTemplate();
+MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const merchantInformationLanguageTemplateStringFormat = merchantInformationLanguageTemplate.toString();
+string merchantInformationLanguageTemplateStringFormat = merchantInformationLanguageTemplate.ToString();
 ```
 
 
@@ -348,78 +347,78 @@ const merchantInformationLanguageTemplateStringFormat = merchantInformationLangu
 | ------ | ------ |
 | `string` | MerchantInformationLanguageTemplate in TLV string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const merchantInformationLanguageTemplateBinaryFormat = merchantInformationLanguageTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string merchantInformationLanguageTemplateBinaryFormat = merchantInformationLanguageTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const merchantInformationLanguageTemplateRawFormat = merchantInformationLanguageTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string merchantInformationLanguageTemplateRawFormat = merchantInformationLanguageTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | MerchantInformationLanguageTemplate in TLV binary OR TLV raw data format |
 
-###### validate
+###### Validate
 
 ```
-const isValid = merchantInformationLanguageTemplate.validate();
+bool isValid = merchantInformationLanguageTemplate.Validate();
 ```
 
 | Return Type | Description |
 | ------ | ------ |
 | `boolean` | True if required properties is valid otherwise throw an Error |
 
-###### setLanguagePreference
+###### SetLanguagePreference
 
 ```
-const value = "PT";
+string value = "PT";
 
-merchantInformationLanguageTemplate.setLanguagePreference(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-###### setMerchantName
-
-```
-const value = "Merchant Organization";
-
-merchantInformationLanguageTemplate.setMerchantName(value);
+merchantInformationLanguageTemplate.SetLanguagePreference(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### setMerchantCity
+###### SetMerchantName
 
 ```
-const value = "Brasilia";
+string value = "Merchant Organization";
 
-merchantInformationLanguageTemplate.setMerchantCity(value);
+merchantInformationLanguageTemplate.SetMerchantName(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### addRFUforEMVCo
+###### SetMerchantCity
 
 ```
-const id = "03";
-const value = "12345678";
+string value = "Brasilia";
 
-merchantInformationLanguageTemplate.addRFUforEMVCo(id, value);
+merchantInformationLanguageTemplate.SetMerchantCity(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+###### AddRFUforEMVCo
+
+```
+string id = "03";
+string value = "12345678";
+
+merchantInformationLanguageTemplate.AddRFUforEMVCo(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -432,18 +431,17 @@ merchantInformationLanguageTemplate.addRFUforEMVCo(id, value);
 Represents a merchant account information.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const unreservedTemplate = Merchant.buildUnreservedTemplate();
+UnreservedTemplate unreservedTemplate = new UnreservedTemplate();
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const unreservedTemplateStringFormat = unreservedTemplate.toString();
+string unreservedTemplateStringFormat = unreservedTemplate.ToString();
 ```
 
 
@@ -451,44 +449,44 @@ const unreservedTemplateStringFormat = unreservedTemplate.toString();
 | ------ | ------ |
 | `string` | UnreservedTemplate in TLV string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const unreservedTemplateBinaryFormat = unreservedTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string unreservedTemplateBinaryFormat = unreservedTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const unreservedTemplateRawFormat = unreservedTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string unreservedTemplateRawFormat = unreservedTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | UnreservedTemplate in TLV binary OR TLV raw data format |
 
-###### setGloballyUniqueIdentifier
+###### SetGloballyUniqueIdentifier
 
 ```
-const value = "15600000000";
+string value = "15600000000";
 
-unreservedTemplate.setGloballyUniqueIdentifier(value);
+unreservedTemplate.SetGloballyUniqueIdentifier(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### addContextSpecificData
+###### AddContextSpecificData
 
 ```
 const id = "03";
 const value = "12345678";
 
-unreservedTemplate.addContextSpecificData(id, value);
+unreservedTemplate.AddContextSpecificData(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -501,18 +499,17 @@ unreservedTemplate.addContextSpecificData(id, value);
 Represents a payment system specific.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const paymentSystemSpecific = Merchant.buildPaymentSystemSpecific();
+PaymentSystemSpecific paymentSystemSpecific = new PaymentSystemSpecific();
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const paymentSystemSpecificStringFormat = paymentSystemSpecific.toString();
+string paymentSystemSpecificStringFormat = paymentSystemSpecific.ToString();
 ```
 
 
@@ -520,44 +517,44 @@ const paymentSystemSpecificStringFormat = paymentSystemSpecific.toString();
 | ------ | ------ |
 | `string` | PaymentSystemSpecific in TLV string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const paymentSystemSpecificBinaryFormat = paymentSystemSpecific.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string paymentSystemSpecificBinaryFormat = paymentSystemSpecific.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const paymentSystemSpecificRawFormat = paymentSystemSpecific.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string paymentSystemSpecificRawFormat = paymentSystemSpecific.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | PaymentSystemSpecific in TLV binary OR TLV raw data format |
 
-###### setGloballyUniqueIdentifier
+###### SetGloballyUniqueIdentifier
 
 ```
-const value = "15600000000";
+string value = "15600000000";
 
-paymentSystemSpecific.setGloballyUniqueIdentifier(value);
+paymentSystemSpecific.SetGloballyUniqueIdentifier(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### addPaymentSystemSpecific
+###### AddPaymentSystemSpecific ( Replaced by AddContextSpecificData)
 
 ```
-const id = "03";
-const value = "12345678";
+string id = "03";
+string value = "12345678";
 
-paymentSystemSpecific.addPaymentSystemSpecific(id, value);
+paymentSystemSpecific.AddContextSpecificData(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -570,18 +567,17 @@ paymentSystemSpecific.addPaymentSystemSpecific(id, value);
 Represents an additional data field template.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate();
+AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
 ```
 
 ##### Methods
 
-###### toString
+###### ToString
 
 ```
-const additionalDataFieldTemplateStringFormat = additionalDataFieldTemplate.toString();
+string additionalDataFieldTemplateStringFormat = additionalDataFieldTemplate.ToString();
 ```
 
 
@@ -589,44 +585,31 @@ const additionalDataFieldTemplateStringFormat = additionalDataFieldTemplate.toSt
 | ------ | ------ |
 | `string` | AdditionalDataFieldTemplate in TLV string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const additionalDataFieldTemplateBinaryFormat = additionalDataFieldTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string additionalDataFieldTemplateBinaryFormat = additionalDataFieldTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const additionalDataFieldTemplateRawFormat = additionalDataFieldTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string additionalDataFieldTemplateRawFormat = additionalDataFieldTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | AdditionalDataFieldTemplate in TLV binary OR TLV raw data format |
 
-###### setBillNumber
+###### SetBillNumber
 
 ```
-const value = "34250";
+string value = "34250";
 
-additionalDataFieldTemplate.setBillNumber(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setMobileNumber
-
-```
-const value = "+5561991112222";
-
-additionalDataFieldTemplate.setMobileNumber(value);
+additionalDataFieldTemplate.SetBillNumber(value);
 ```
 
 | Parameters | Description | Type |
@@ -634,25 +617,12 @@ additionalDataFieldTemplate.setMobileNumber(value);
 | `value` | Some value | **string** |
 
 
-###### setStoreLabel
+###### SetMobileNumber
 
 ```
-const value = "1234";
+string value = "+5561991112222";
 
-additionalDataFieldTemplate.setStoreLabel(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setLoyaltyNumber
-
-```
-const value = "12345";
-
-additionalDataFieldTemplate.setLoyaltyNumber(value);
+additionalDataFieldTemplate.SetMobileNumber(value);
 ```
 
 | Parameters | Description | Type |
@@ -660,25 +630,12 @@ additionalDataFieldTemplate.setLoyaltyNumber(value);
 | `value` | Some value | **string** |
 
 
-###### setReferenceLabel
+###### SetStoreLabel
 
 ```
-const value = "example";
+string value = "1234";
 
-additionalDataFieldTemplate.setReferenceLabel(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setCustomerLabel
-
-```
-const value = "***";
-
-additionalDataFieldTemplate.setCustomerLabel(value);
+additionalDataFieldTemplate.SetStoreLabel(value);
 ```
 
 | Parameters | Description | Type |
@@ -686,25 +643,12 @@ additionalDataFieldTemplate.setCustomerLabel(value);
 | `value` | Some value | **string** |
 
 
-###### setTerminalLabel
+###### SetLoyaltyNumber
 
 ```
-const value = "A6008667";
+string value = "12345";
 
-additionalDataFieldTemplate.setTerminalLabel(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setPurposeTransaction
-
-```
-const value = "Some purpose";
-
-additionalDataFieldTemplate.setPurposeTransaction(value);
+additionalDataFieldTemplate.SetLoyaltyNumber(value);
 ```
 
 | Parameters | Description | Type |
@@ -712,25 +656,77 @@ additionalDataFieldTemplate.setPurposeTransaction(value);
 | `value` | Some value | **string** |
 
 
-###### setAdditionalConsumerDataRequest
+###### SetReferenceLabel
 
 ```
-const value = "ME";
+string value = "example";
 
-additionalDataFieldTemplate.setAdditionalConsumerDataRequest(value);
+additionalDataFieldTemplate.SetReferenceLabel(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### addRFUforEMVCo
+
+###### SetCustomerLabel
 
 ```
-const id = "03";
-const value = "12345678";
+string value = "***";
 
-additionalDataFieldTemplate.addRFUforEMVCo(id, value);
+additionalDataFieldTemplate.SetCustomerLabel(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+
+###### SetTerminalLabel
+
+```
+string value = "A6008667";
+
+additionalDataFieldTemplate.SetTerminalLabel(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+
+###### SetPurposeTransaction
+
+```
+string value = "Some purpose";
+
+additionalDataFieldTemplate.SetPurposeTransaction(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+
+###### SetAdditionalConsumerDataRequest
+
+```
+string value = "ME";
+
+additionalDataFieldTemplate.SetAdditionalConsumerDataRequest(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+###### AddRFUforEMVCo
+
+```
+string id = "03";
+string value = "12345678";
+
+additionalDataFieldTemplate.AddRFUforEMVCo(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -738,15 +734,15 @@ additionalDataFieldTemplate.addRFUforEMVCo(id, value);
 | `id` | Tag ID | **string** |
 | `value` | Some value | **string** |
 
-###### addPaymentSystemSpecific
+###### AddPaymentSystemSpecific ( Replaced by AddContextSpecificData)
 
 ```
-const id = "03";
-const value = Merchant.buildPaymentSystemSpecific();
-value.setGloballyUniqueIdentifier("15600000000");
-value.addPaymentSystemSpecific("03", "12345678");
+string id = "03";
+string value = new PaymentSystemSpecific();
+value.SetGloballyUniqueIdentifier("15600000000");
+value.AddPaymentSystemSpecific("03", "12345678");
 
-additionalDataFieldTemplate.addPaymentSystemSpecific(id, value);
+additionalDataFieldTemplate.AddContextSpecificData(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -759,18 +755,17 @@ additionalDataFieldTemplate.addPaymentSystemSpecific(id, value);
 Represents an EMV QRCode.
 
 ```
-const { Merchant } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+using emv_qrcps.QrCode.Merchant;
 
-const emvqr = Merchant.buildEMVQR();
+string emvqr = new EMVQR();
 ```
 
 ##### Methods
 
-###### generatePayload
+###### GeneratePayload
 
 ```
-const emvqrStringFormat = emvqr.generatePayload();
+string emvqrStringFormat = emvqr.GeneratePayload();
 ```
 
 
@@ -778,61 +773,61 @@ const emvqrStringFormat = emvqr.generatePayload();
 | ------ | ------ |
 | `string` | EMV QRCode payload in string format. |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const emvqrBinaryFormat = emvqr.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string emvqrBinaryFormat = emvqr.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const emvqrRawFormat = emvqr.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+string emvqrRawFormat = emvqr.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | EMV QRCode in binary OR raw data format |
 
-###### toBinary
+###### ToBinary
 
 ```
-const emvqrBinaryFormat = emvqr.toBinary(); // Binary Data (shown as hex bytes)
+string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 ```
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | EMV QRCode in binary format |
 
-###### rawData
+###### RawData
 
 ```
-const emvqrBinaryFormat = emvqr.rawData(); // Raw Data
+string emvqrBinaryFormat = emvqr.RawData(); // Raw Data
 ```
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | EMV QRCode in raw data format |
 
-###### validate
+###### Validate
 
 ```
-const isValid = emvqr.validate();
+bool isValid = emvqr.Validate();
 ```
 
 | Return Type | Description |
 | ------ | ------ |
 | `boolean` | True if required properties is valid otherwise throw an Error |
 
-###### setPayloadFormatIndicator
+###### SetPayloadFormatIndicator
 
 ```
-const value = "01";
+string value = "01";
 
-emvqr.setPayloadFormatIndicator(value);
+emvqr.SetPayloadFormatIndicator(value);
 ```
 
 | Parameters | Description | Type |
@@ -840,10 +835,10 @@ emvqr.setPayloadFormatIndicator(value);
 | `value` | Some value | **string** |
 
 
-###### setPointOfInitiationMethod
+###### SetPointOfInitiationMethod
 
 ```
-const value = "00";
+string value = "00";
 
 emvqr.setPointOfInitiationMethod(value);
 ```
@@ -853,10 +848,10 @@ emvqr.setPointOfInitiationMethod(value);
 | `value` | Some value | **string** |
 
 
-###### setMerchantCategoryCode
+###### SetMerchantCategoryCode
 
 ```
-const value = "Technology";
+string value = "Technology";
 
 emvqr.setMerchantCategoryCode(value);
 ```
@@ -866,25 +861,12 @@ emvqr.setMerchantCategoryCode(value);
 | `value` | Some value | **string** |
 
 
-###### setTransactionCurrency
+###### SetTransactionCurrency
 
 ```
-const value = "BRL";
+string value = "BRL";
 
-emvqr.setTransactionCurrency(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setTransactionAmount
-
-```
-const value = "20.5";
-
-emvqr.setTransactionAmount(value);
+emvqr.SetTransactionCurrency(value);
 ```
 
 | Parameters | Description | Type |
@@ -892,25 +874,12 @@ emvqr.setTransactionAmount(value);
 | `value` | Some value | **string** |
 
 
-###### setTipOrConvenienceIndicator
+###### SetTransactionAmount
 
 ```
-const value = "2";
+string value = "20.5";
 
-emvqr.setTipOrConvenienceIndicator(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-
-###### setValueOfConvenienceFeeFixed
-
-```
-const value = "2.00";
-
-emvqr.setValueOfConvenienceFeeFixed(value);
+emvqr.SetTransactionAmount(value);
 ```
 
 | Parameters | Description | Type |
@@ -918,12 +887,25 @@ emvqr.setValueOfConvenienceFeeFixed(value);
 | `value` | Some value | **string** |
 
 
-###### setValueOfConvenienceFeePercentage
+###### SetTipOrConvenienceIndicator
 
 ```
-const value = "0.90";
+string value = "2";
 
-emvqr.setValueOfConvenienceFeePercentage(value);
+emvqr.SetTipOrConvenienceIndicator(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+
+###### SetValueOfConvenienceFeeFixed
+
+```
+string value = "2.00";
+
+emvqr.SetValueOfConvenienceFeeFixed(value);
 ```
 
 | Parameters | Description | Type |
@@ -931,109 +913,122 @@ emvqr.setValueOfConvenienceFeePercentage(value);
 | `value` | Some value | **string** |
 
 
-###### setCountryCode
+###### SetValueOfConvenienceFeePercentage
 
 ```
-const value = "55";
+string value = "0.90";
 
-emvqr.setCountryCode(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-###### setMerchantName
-
-```
-const value = "Merchant Organization";
-
-emvqr.setMerchantName(value);
+emvqr.SetValueOfConvenienceFeePercentage(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### setMerchantCity
+
+###### SetCountryCode
 
 ```
-const value = "Brasilia";
+string value = "55";
 
-emvqr.setMerchantCity(value);
-```
-
-| Parameters | Description | Type |
-| ------ | ------ | ------ |
-| `value` | Some value | **string** |
-
-###### setPostalCode
-
-```
-const value = "71715-000";
-
-emvqr.setPostalCode(value);
+emvqr.SetCountryCode(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### setCRC
+###### SetMerchantName
 
 ```
-const value = "AF35";
+string value = "Merchant Organization";
 
-emvqr.setCRC(value);
+emvqr.SetMerchantName(value);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `value` | Some value | **string** |
 
-###### setAdditionalDataFieldTemplate
+###### SetMerchantCity
 
 ```
-const additionalDataFieldTemplate = Merchant.buildAdditionalDataFieldTemplate();
-additionalDataFieldTemplate.setStoreLabel("1234");
-additionalDataFieldTemplate.setCustomerLabel("***");
-additionalDataFieldTemplate.setTerminalLabel("A6008667");
-additionalDataFieldTemplate.setAdditionalConsumerDataRequest("ME");
+string value = "Brasilia";
 
-emvqr.setAdditionalDataFieldTemplate(additionalDataFieldTemplate);
+emvqr.SetMerchantCity(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+###### SetPostalCode
+
+```
+string value = "71715-000";
+
+emvqr.SetPostalCode(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+###### SetCRC
+
+```
+string value = "AF35";
+
+emvqr.SetCRC(value);
+```
+
+| Parameters | Description | Type |
+| ------ | ------ | ------ |
+| `value` | Some value | **string** |
+
+###### SetAdditionalDataFieldTemplate
+
+```
+AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
+additionalDataFieldTemplate.SetStoreLabel("1234");
+additionalDataFieldTemplate.SetCustomerLabel("***");
+additionalDataFieldTemplate.SetTerminalLabel("A6008667");
+additionalDataFieldTemplate.SetAdditionalConsumerDataRequest("ME");
+
+emvqr.SetAdditionalDataFieldTemplate(additionalDataFieldTemplate);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `additionalDataFieldTemplate` | Some additional data field template | **AdditionalDataFieldTemplate** |
 
-###### setMerchantInformationLanguageTemplate
+###### SetMerchantInformationLanguageTemplate
 
 ```
-let merchantInformationLanguageTemplate = Merchant.buildMerchantInformationLanguageTemplate();
-merchantInformationLanguageTemplate.setLanguagePreference("PT");
-merchantInformationLanguageTemplate.setMerchantName("Merchant Organization");
-merchantInformationLanguageTemplate.setMerchantCity("Brasilia");
-emvqr.setMerchantInformationLanguageTemplate(merchantInformationLanguageTemplate);
+MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
+merchantInformationLanguageTemplate.SetLanguagePreference("PT");
+merchantInformationLanguageTemplate.SetMerchantName("Merchant Organization");
+merchantInformationLanguageTemplate.SetMerchantCity("Brasilia");
+emvqr.SetMerchantInformationLanguageTemplate(merchantInformationLanguageTemplate);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `merchantInformationLanguageTemplate` | Some merchant information language template | **MerchantInformationLanguageTemplate** |
 
-###### addMerchantAccountInformation
+###### AddMerchantAccountInformation
 
 ```
-const id = "27";
+string id = "27";
 
-const merchantAccountInformation = Merchant.buildMerchantAccountInformation();
-merchantAccountInformation.setGloballyUniqueIdentifier("com.p2pqrpay");
-merchantAccountInformation.addPaymentNetworkSpecific("01", "PAPHPHM1XXX");
-merchantAccountInformation.addPaymentNetworkSpecific("02", "99964403");
-merchantAccountInformation.addPaymentNetworkSpecific("04", "09985903943");
-merchantAccountInformation.addPaymentNetworkSpecific("05", "+639985903943");
+MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
+merchantAccountInformation.SetGloballyUniqueIdentifier("com.p2pqrpay");
+merchantAccountInformation.AddContextSpecificData("01", "PAPHPHM1XXX");
+merchantAccountInformation.AddContextSpecificData("02", "99964403");
+merchantAccountInformation.AddContextSpecificData("04", "09985903943");
+merchantAccountInformation.AddContextSpecificData("05", "+639985903943");
 
-emvqr.addMerchantAccountInformation(id, merchantAccountInformation);
+emvqr.AddMerchantAccountInformation(id, merchantAccountInformation);
 ```
 
 | Parameters | Description | Type |
@@ -1041,16 +1036,16 @@ emvqr.addMerchantAccountInformation(id, merchantAccountInformation);
 | `id` | Tag ID | **string** |
 | `value` | Some merchant account information | **string** |
 
-###### addUnreservedTemplates
+###### AddUnreservedTemplates
 
 ```
-const id = "80";
+string id = "80";
 
-const unreservedTemplate = Merchant.buildUnreservedTemplate();
-unreservedTemplate.setGloballyUniqueIdentifier("A011223344998877");
-unreservedTemplate.addContextSpecificData("07", "12345678");
+string unreservedTemplate = new UnreservedTemplate();
+unreservedTemplate.SetGloballyUniqueIdentifier("A011223344998877");
+unreservedTemplate.AddContextSpecificData("07", "12345678");
 
-emvqr.addUnreservedTemplates(id, unreservedTemplate);
+emvqr.AddUnreservedTemplates(id, unreservedTemplate);
 ```
 
 | Parameters | Description | Type |
@@ -1058,7 +1053,7 @@ emvqr.addUnreservedTemplates(id, unreservedTemplate);
 | `id` | Tag ID | **string** |
 | `value` | Some unreserved template | **string** |
 
-###### addRFUforEMVCo
+###### AddRFUforEMVCo
 
 ```
 const id = "03";
@@ -1255,7 +1250,7 @@ Represents a **Basic Encoding Rules** **TAG** + **Length** + **Value**.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Merchant;
+const { MerchantConsts } = Merchant;
 
 const berTLV = Merchant.buildBERTLV();
 ```
@@ -1438,19 +1433,19 @@ berTLV.format();
 | ------ | ------ |
 | `string` | BERTLV in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const berTlvBinaryFormat = berTLV.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+const berTlvBinaryFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const berTlvRawFormat = berTLV.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+const berTlvRawFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -1463,7 +1458,7 @@ Represents an application specific transparent template.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Consumer;
+const { MerchantConsts } = Consumer;
 
 const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
 ```
@@ -1496,19 +1491,19 @@ applicationSpecificTransparentTemplate.format();
 | ------ | ------ |
 | `string` | ApplicationSpecificTransparentTemplate in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const binaryFormat = applicationSpecificTransparentTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+const binaryFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = applicationSpecificTransparentTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+const rawFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -1521,7 +1516,7 @@ Represents a common data transparent template.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Consumer;
+const { MerchantConsts } = Consumer;
 
 const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
 ```
@@ -1554,19 +1549,19 @@ commonDataTransparentTemplate.format();
 | ------ | ------ |
 | `string` | CommonDataTransparentTemplate in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const binaryFormat = commonDataTransparentTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+const binaryFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = commonDataTransparentTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+const rawFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -1579,7 +1574,7 @@ Represents an application template.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Consumer;
+const { MerchantConsts } = Consumer;
 
 const applicationTemplate = Consumer.buildApplicationTemplate();
 ```
@@ -1629,19 +1624,19 @@ applicationTemplate.format();
 | ------ | ------ |
 | `string` | ApplicationTemplate in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const binaryFormat = applicationTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+const binaryFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = applicationTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+const rawFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -1654,7 +1649,7 @@ Represents a common data template.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Consumer;
+const { MerchantConsts } = Consumer;
 
 const commonDataTemplate = Consumer.buildCommonDataTemplate();
 ```
@@ -1706,19 +1701,19 @@ commonDataTemplate.format();
 | ------ | ------ |
 | `string` | CommonDataTemplate in string format |
 
-###### dataWithType
+###### DataWithType
 
 ```
-const binaryFormat = commonDataTemplate.dataWithType(Constants.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+const binaryFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = commonDataTemplate.dataWithType(Constants.DATA_TYPE.RAW, ' '); // Raw Data
+const rawFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `dataType` | Data type value | **Constants.DATA_TYPE.`BINARY` \| Constants.DATA_TYPE.`RAW`** |
+| `dataType` | Data type value | **MerchantConsts.DATA_TYPE.`BINARY` \| MerchantConsts.DATA_TYPE.`RAW`** |
 | `indent` | Indent character (Ex.: ' ') | **string** |
 
 | Return Type | Description |
@@ -1731,7 +1726,7 @@ Represents an EMV QRCode.
 
 ```
 const { Consumer } = require('steplix-emv-qrcps');
-const { Constants } = Consumer;
+const { MerchantConsts } = Consumer;
 
 const emvqr = Consumer.buildEMVQR();
 ```
@@ -1813,10 +1808,10 @@ commonDataTemplate.generatePayload();
 | ------ | ------ |
 | `string` | EMVQR in base64 string format |
 
-###### toBinary
+###### ToBinary
 
 ```
-const emvqrBinaryFormat = emvqr.toBinary(); // Binary Data (shown as hex bytes)
+const emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 ```
 
 | Return Type | Description |
