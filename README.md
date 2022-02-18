@@ -1,4 +1,4 @@
-## This library is a port of the steplix/emv-qrcps [library](https://github.com/steplix/emv-qrcps#readme) library which is a fork of Emmanuel Kiametis [library]# ###(https://www.npmjs.com/package/emv-qrcps) to the .NET platform. Basically the implementation is the same, so the tutorial below has been copied and adapted for use in C#.
+### This library is a port of the steplix/emv-qrcps [library](https://github.com/steplix/emv-qrcps#readme) library which is a fork of Emmanuel Kiametis [library](https://www.npmjs.com/package/emv-qrcps) to the .NET platform. Basically the implementation is the same, so the tutorial below has been copied and adapted for use in C#.
 
 This library was made to help people that to generate and parse EMV QRcode according with the specifications:
 
