@@ -36,14 +36,14 @@ TLV tlv = new TLV(tag, length, value);
 
 | `TLV` | It means an object that stores a **Tag** + **Lenght** + **Value**. |
 
-#### EMVQR
+#### MerchantEMVQR
 
 ```
-EMVQR emvqr = new EMVQR();
+MerchantEMVQR emvqr = new MerchantEMVQR();
 
 // ... OR
 
-EMVQR emvq = new EMVQR()
+MerchantEMVQR emvq = new MerchantEMVQR()
 (
     payloadFormatIndicator,
     pointOfInitiationMethod,
@@ -89,7 +89,7 @@ EMVQR emvq = new EMVQR()
 
 | Return Type | Description |
 | ------ | ------ |
-| `EMVQR` | It means an object that represents an EMV QRCode. |
+| `MerchantEMVQR` | It means an object that represents an EMV QRCode. |
 
 #### AdditionalDataFieldTemplate
 
@@ -748,14 +748,14 @@ additionalDataFieldTemplate.AddContextSpecificData(id, value);
 | `id` | Tag ID | **string** |
 | `value` | Some value | **string** |
 
-#### EMVQR
+#### MerchantEMVQR
 
 Represents an EMV QRCode.
 
 ```
 using emv_qrcps.QrCode.Merchant;
 
-string emvqr = new EMVQR();
+string emvqr = new MerchantEMVQR();
 ```
 
 ##### Methods
@@ -1054,10 +1054,10 @@ emvqr.AddUnreservedTemplates(id, unreservedTemplate);
 ###### AddRFUforEMVCo
 
 ```
-const id = "03";
-const value = "12345678";
+string id = "03";
+string value = "12345678";
 
-emvqr.addRFUforEMVCo(id, value);
+emvqr.AddRFUforEMVCo(id, value);
 ```
 
 | Parameters | Description | Type |
@@ -1071,19 +1071,19 @@ emvqr.addRFUforEMVCo(id, value);
 You can use this Module by importing:
 
 ```
-const { Consumer } = require('steplix-emv-qrcps')
+using emv_qrcps.QrCode.Consumer;
 ```
 
-### Methods
+### Instances
 
-#### buildBERTLV
+#### BERTLV
 
 ```
-const berTLV = Consumer.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 
 // ... OR
 
-const berTLV = Consumer.buildBERTLV(
+BERTLV berTLV = new BERTLV(
     dataApplicationDefinitionFileName,
     dataApplicationLabel,
     dataTrack2EquivalentData,
@@ -1125,14 +1125,14 @@ const berTLV = Consumer.buildBERTLV(
 | ------ | ------ |
 | `BERTLV` | It means the TLV Object of the consumer module. |
 
-#### buildApplicationSpecificTransparentTemplate
+#### ApplicationSpecificTransparentTemplate
 
 ```
-const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
+ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = new ApplicationSpecificTransparentTemplate();
 
 // ... OR
 
-const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate(
+ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = new ApplicationSpecificTransparentTemplate(
 	berTLV = BERTLV()
 );
 
@@ -1147,14 +1147,14 @@ const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecific
 | ------ | ------ |
 | `ApplicationSpecificTransparentTemplate` | It means an object that stores an application specific transparent template. |
 
-#### buildApplicationTemplate
+#### ApplicationTemplate
 
 ```
-const applicationTemplate = Consumer.buildApplicationTemplate();
+ApplicationTemplate applicationTemplate = new ApplicationTemplate();
 
 // ... OR
 
-const applicationTemplate = Consumer.buildApplicationTemplate(
+ApplicationTemplate applicationTemplate = new ApplicationTemplate(
 	berTLV = BERTLV(),
 	applicationSpecificTransparentTemplates = []
 );
@@ -1171,14 +1171,14 @@ const applicationTemplate = Consumer.buildApplicationTemplate(
 | ------ | ------ |
 | `ApplicationTemplate` | It means an object that stores an application template. |
 
-#### buildCommonDataTransparentTemplate
+#### CommonDataTransparentTemplate
 
 ```
-const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
+CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTransparentTemplate();
 
 // ... OR
 
-const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate(
+CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTransparentTemplate(
     berTLV = BERTLV()
 );
 
@@ -1192,14 +1192,14 @@ const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplat
 | ------ | ------ |
 | `CommonDataTransparentTemplate` | It means an object that stores a common data transparent template. |
 
-#### buildCommonDataTemplate
+#### CommonDataTemplate
 
 ```
-const commonDataTemplate = Consumer.buildCommonDataTemplate();
+CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 
 // ... OR
 
-const commonDataTemplate = Consumer.buildCommonDataTemplate(
+CommonDataTemplate commonDataTemplate = new CommonDataTemplate(
     berTLV = BERTLV(),
 	commonDataTransparentTemplates = [] 
 );
@@ -1209,20 +1209,20 @@ const commonDataTemplate = Consumer.buildCommonDataTemplate(
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `berTLV` | BERTLV Object | **BERTLV** |
-| `commonDataTransparentTemplates` | Common data transparent templates | **array (CommonDataTransparentTemplate)** |
+| `commonDataTransparentTemplates` | Common data transparent templates | **AppTemplate[]** |
 
 | Return Type | Description |
 | ------ | ------ |
 | `CommonDataTemplate` | It means an object that stores a common data template. |
 
-#### buildEMVQR
+#### ConsumerEMVQR
 
 ```
-const EMVQR = Consumer.buildEMVQR();
+ConsumerEMVQR emvqr = new ConsumerEMVQR();
 
 // ... OR
 
-const EMVQR = Consumer.buildEMVQR(
+ConsumerEMVQR emvqr = new ConsumerEMVQR(
     dataPayloadFormatIndicator,
     applicationTemplates,
     commonDataTemplates
@@ -1232,12 +1232,12 @@ const EMVQR = Consumer.buildEMVQR(
 | Parameter | Description | Type |
 | ------ | ------ | ------ |
 | `dataPayloadFormatIndicator` | Payload Format Indicator | **string** |
-| `applicationTemplates` | Application Templates | **array [ ApplicationTemplate ]** |
-| `commonDataTemplates` | Common Data templates | **array [ CommonDataTemplate ]** |
+| `applicationTemplates` | Application Templates | **AppTemplate[]** |
+| `commonDataTemplates` | Common Data templates | **CommonTemplate[]** |
 
 | Return Type | Description |
 | ------ | ------ |
-| `EMVQR` | It means an object that represents an EMV QRCode. |
+| `ConsumerEMVQR` | It means an object that represents an EMV QRCode. |
 
 
 ### Object Types
@@ -1247,18 +1247,18 @@ const EMVQR = Consumer.buildEMVQR(
 Represents a **Basic Encoding Rules** **TAG** + **Length** + **Value**.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Merchant;
+using emv_qrcps.QrCode.Consumer;
+using emv-qrcps.QrCode.Merchant;
 
-const berTLV = Merchant.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 ```
 
 ##### Methods
 
-###### setDataApplicationDefinitionFileName
+###### SetDataApplicationDefinitionFileName
 
 ```
-berTLV.setDataApplicationDefinitionFileName("A0000000555555");
+berTLV.SetDataApplicationDefinitionFileName("A0000000555555");
 ```
 
 
@@ -1266,21 +1266,21 @@ berTLV.setDataApplicationDefinitionFileName("A0000000555555");
 | ------ | ------ | ------ |
 | `dataApplicationDefinitionFileName` | Application Definition File (ADF) Name | **string(in-hex-decimal-format)** |
 
-###### setDataApplicationLabel
+###### SetDataApplicationLabel
 
 ```
-berTLV.setDataApplicationLabel("Product1");
+berTLV.SetDataApplicationLabel("Product1");
 ```
 
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
-| `setDataApplicationLabel` | Application Label | **string** |
+| `SetDataApplicationLabel` | Application Label | **string** |
 
-###### setDataTrack2EquivalentData
+###### SetDataTrack2EquivalentData
 
 ```
-berTLV.setDataTrack2EquivalentData("AABBCCDD");
+berTLV.SetDataTrack2EquivalentData("AABBCCDD");
 ```
 
 
@@ -1288,10 +1288,10 @@ berTLV.setDataTrack2EquivalentData("AABBCCDD");
 | ------ | ------ | ------ |
 | `dataTrack2EquivalentData` | Track 2 Equivalent Data | **string(in-hex-decimal-format)** |
 
-###### setDataApplicationPAN
+###### SetDataApplicationPAN
 
 ```
-berTLV.setDataApplicationPAN("1234567890123458");
+berTLV.SetDataApplicationPAN("1234567890123458");
 ```
 
 
@@ -1299,10 +1299,10 @@ berTLV.setDataApplicationPAN("1234567890123458");
 | ------ | ------ | ------ |
 | `dataApplicationPAN` | Application PAN | **string(in-hex-decimal-format)** |
 
-###### setDataCardholderName
+###### SetDataCardholderName
 
 ```
-berTLV.setDataCardholderName("CARDHOLDER/EMV");
+berTLV.SetDataCardholderName("CARDHOLDER/EMV");
 ```
 
 
@@ -1310,10 +1310,10 @@ berTLV.setDataCardholderName("CARDHOLDER/EMV");
 | ------ | ------ | ------ |
 | `dataCardholderName` | Cardholder Name | **string** |
 
-###### setDataLanguagePreference
+###### SetDataLanguagePreference
 
 ```
-berTLV.setDataLanguagePreference("ruesdeen");
+berTLV.SetDataLanguagePreference("ruesdeen");
 ```
 
 
@@ -1321,10 +1321,10 @@ berTLV.setDataLanguagePreference("ruesdeen");
 | ------ | ------ | ------ |
 | `dataLanguagePreference` | Language Preference | **string** |
 
-###### setDataIssuerURL
+###### SetDataIssuerURL
 
 ```
-berTLV.setDataIssuerURL("http://someuri.com");
+berTLV.SetDataIssuerURL("http://someuri.com");
 ```
 
 
@@ -1332,7 +1332,7 @@ berTLV.setDataIssuerURL("http://someuri.com");
 | ------ | ------ | ------ |
 | `dataIssuerURL` | Issuer URL | **string** |
 
-###### setDataApplicationVersionNumber
+###### SetDataApplicationVersionNumber
 
 ```
 berTLV.setDataApplicationVersionNumber("04");
@@ -1343,10 +1343,10 @@ berTLV.setDataApplicationVersionNumber("04");
 | ------ | ------ | ------ |
 | `dataApplicationVersionNumber` | Application Version Number | **string(in-hex-decimal-format)** |
 
-###### setDataIssuerApplicationData
+###### SetDataIssuerApplicationData
 
 ```
-berTLV.setDataIssuerApplicationData("06010A03000000");
+berTLV.SetDataIssuerApplicationData("06010A03000000");
 ```
 
 
@@ -1354,10 +1354,10 @@ berTLV.setDataIssuerApplicationData("06010A03000000");
 | ------ | ------ | ------ |
 | `dataIssuerApplicationData` | Issuer application data | **string(in-hex-decimal-format)** |
 
-###### setDataTokenRequestorID
+###### SetDataTokenRequestorID
 
 ```
-berTLV.setDataTokenRequestorID("0601AABBCC");
+berTLV.SetDataTokenRequestorID("0601AABBCC");
 ```
 
 
@@ -1365,10 +1365,10 @@ berTLV.setDataTokenRequestorID("0601AABBCC");
 | ------ | ------ | ------ |
 | `dataTokenRequestorID` | Token Requestor ID | **string(in-hex-decimal-format)** |
 
-###### setDataPaymentAccountReference
+###### SetDataPaymentAccountReference
 
 ```
-berTLV.setDataPaymentAccountReference("0708AABBCCDD");
+berTLV.SetDataPaymentAccountReference("0708AABBCCDD");
 ```
 
 
@@ -1376,10 +1376,10 @@ berTLV.setDataPaymentAccountReference("0708AABBCCDD");
 | ------ | ------ | ------ |
 | `dataPaymentAccountReference` | Payment Account Reference | **string(in-hex-decimal-format)** |
 
-###### setDataLast4DigitsOfPAN
+###### SetDataLast4DigitsOfPAN
 
 ```
-berTLV.setDataLast4DigitsOfPAN("07080201");
+berTLV.SetDataLast4DigitsOfPAN("07080201");
 ```
 
 
@@ -1387,10 +1387,10 @@ berTLV.setDataLast4DigitsOfPAN("07080201");
 | ------ | ------ | ------ |
 | `dataLast4DigitsOfPAN` | Last 4 Digits of PAN | **string(in-hex-decimal-format)** |
 
-###### setDataApplicationCryptogram
+###### SetDataApplicationCryptogram
 
 ```
-berTLV.setDataApplicationCryptogram("584FD385FA234BCC");
+berTLV.SetDataApplicationCryptogram("584FD385FA234BCC");
 ```
 
 
@@ -1398,10 +1398,10 @@ berTLV.setDataApplicationCryptogram("584FD385FA234BCC");
 | ------ | ------ | ------ |
 | `dataApplicationCryptogram` | Application Cryptogram | **string(in-hex-decimal-format)** |
 
-###### setDataApplicationTransactionCounter
+###### SetDataApplicationTransactionCounter
 
 ```
-berTLV.setDataApplicationTransactionCounter("0001");
+berTLV.SetDataApplicationTransactionCounter("0001");
 ```
 
 
@@ -1409,10 +1409,10 @@ berTLV.setDataApplicationTransactionCounter("0001");
 | ------ | ------ | ------ |
 | `dataApplicationTransactionCounter` | Application Transaction Counter | **string(in-hex-decimal-format)** |
 
-###### setDataUnpredictableNumber
+###### SetDataUnpredictableNumber
 
 ```
-berTLV.setDataUnpredictableNumber("6D58EF13");
+berTLV.SetDataUnpredictableNumber("6D58EF13");
 ```
 
 
@@ -1420,10 +1420,10 @@ berTLV.setDataUnpredictableNumber("6D58EF13");
 | ------ | ------ | ------ |
 | `dataUnpredictableNumber` | Unpredictable Number | **string(in-hex-decimal-format)** |
 
-###### format
+###### Format
 
 ```
-berTLV.format();
+berTLV.Format();
 ```
 
 
@@ -1434,11 +1434,11 @@ berTLV.format();
 ###### DataWithType
 
 ```
-const berTlvBinaryFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string berTlvBinaryFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const berTlvRawFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
+string berTlvRawFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
@@ -1455,22 +1455,22 @@ const berTlvRawFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); 
 Represents an application specific transparent template.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Consumer;
+using emv_qrcps.QrCode.Consumer;
+using emv_qrcps.QrCode.Merchant;
 
-const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
+ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = new ApplicationSpecificTransparentTemplate();
 ```
 
 ##### Methods
 
-###### setBERTLV
+###### SetBERTLV
 
 ```
-const berTLV = Consumer.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
 
-applicationSpecificTransparentTemplate.setBERTLV(berTLV);
+applicationSpecificTransparentTemplate.SetBERTLV(berTLV);
 ```
 
 
@@ -1481,7 +1481,7 @@ applicationSpecificTransparentTemplate.setBERTLV(berTLV);
 ###### format
 
 ```
-applicationSpecificTransparentTemplate.format();
+applicationSpecificTransparentTemplate.Format();
 ```
 
 
@@ -1492,11 +1492,11 @@ applicationSpecificTransparentTemplate.format();
 ###### DataWithType
 
 ```
-const binaryFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string binaryFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
+string rawFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
@@ -1513,22 +1513,22 @@ const rawFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantCo
 Represents a common data transparent template.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Consumer;
+using emv_qrcps.QrCode.Consumer;
+using emv_qrcps.QrCode.Merchant;
 
-const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
+CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTransparentTemplate();
 ```
 
 ##### Methods
 
-###### setBERTLV
+###### SetBERTLV
 
 ```
-const berTLV = Consumer.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
 
-commonDataTransparentTemplate.setBERTLV(berTLV);
+commonDataTransparentTemplate.SetBERTLV(berTLV);
 ```
 
 
@@ -1536,10 +1536,10 @@ commonDataTransparentTemplate.setBERTLV(berTLV);
 | ------ | ------ | ------ |
 | `berTLV` | BERTLV Object | **BERTLV** |
 
-###### format
+###### Format
 
 ```
-commonDataTransparentTemplate.format();
+commonDataTransparentTemplate.Format();
 ```
 
 
@@ -1550,11 +1550,11 @@ commonDataTransparentTemplate.format();
 ###### DataWithType
 
 ```
-const binaryFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string binaryFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
+string rawFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
@@ -1571,22 +1571,22 @@ const rawFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA
 Represents an application template.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Consumer;
+using emv_qrcps.QrCode.Consumer;
+using emv_qrcps.QrCode.Merchant;
 
-const applicationTemplate = Consumer.buildApplicationTemplate();
+ApplicationTemplate applicationTemplate = new ApplicationTemplate();
 ```
 
 ##### Methods
 
-###### setBERTLV
+###### SetBERTLV
 
 ```
-const berTLV = Consumer.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
 
-applicationTemplate.setBERTLV(berTLV);
+applicationTemplate.SetBERTLV(berTLV);
 ```
 
 
@@ -1594,17 +1594,17 @@ applicationTemplate.setBERTLV(berTLV);
 | ------ | ------ | ------ |
 | `berTLV` | BERTLV Object | **BERTLV** |
 
-###### addApplicationSpecificTransparentTemplate
+###### AddApplicationSpecificTransparentTemplate
 
 ```
-const applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
+ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
 
-const berTLV1 = Consumer.buildBERTLV();
-berTLV1.setDataApplicationDefinitionFileName("A0000000555555");
-berTLV1.setDataApplicationLabel("Product1");
-applicationSpecificTransparentTemplate.setBERTLV(berTLV1);
+BERTLV berTLV1 = new BERTLV();
+berTLV1.SetDataApplicationDefinitionFileName("A0000000555555");
+berTLV1.SetDataApplicationLabel("Product1");
+applicationSpecificTransparentTemplate.SetBERTLV(berTLV1);
 
-applicationTemplate.addApplicationSpecificTransparentTemplate(applicationSpecificTransparentTemplate);
+applicationTemplate.AddApplicationSpecificTransparentTemplate(applicationSpecificTransparentTemplate);
 ```
 
 | Parameters | Description | Type |
@@ -1614,7 +1614,7 @@ applicationTemplate.addApplicationSpecificTransparentTemplate(applicationSpecifi
 ###### format
 
 ```
-applicationTemplate.format();
+applicationTemplate.Format();
 ```
 
 
@@ -1625,11 +1625,11 @@ applicationTemplate.format();
 ###### DataWithType
 
 ```
-const binaryFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string binaryFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
+string rawFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
@@ -1646,22 +1646,22 @@ const rawFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW,
 Represents a common data template.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Consumer;
+using emv_qrcps.QrCode.Consumer;
+using emv_qrcps.QrCode.Merchant;
 
-const commonDataTemplate = Consumer.buildCommonDataTemplate();
+CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 ```
 
 ##### Methods
 
-###### setBERTLV
+###### SetBERTLV
 
 ```
-const berTLV = Consumer.buildBERTLV();
+BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
 
-commonDataTemplate.setBERTLV(berTLV);
+commonDataTemplate.SetBERTLV(berTLV);
 ```
 
 
@@ -1669,29 +1669,29 @@ commonDataTemplate.setBERTLV(berTLV);
 | ------ | ------ | ------ |
 | `berTLV` | BERTLV Object | **BERTLV** |
 
-###### addCommonDataTransparentTemplate
+###### AddCommonDataTransparentTemplate (Replaced by AddCommonAppTemplate)
 
 ```
-const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
+CommonDataTransparentTemplate commonDataTransparentTemplate = new ommonDataTransparentTemplate();
 
-const berTLV = Consumer.buildBERTLV();
-berTLV.setDataIssuerApplicationData("06010A03000000");
-berTLV.setDataApplicationCryptogram("584FD385FA234BCC");
-berTLV.setDataApplicationTransactionCounter("0001");
-berTLV.setDataUnpredictableNumber("6D58EF13");
-commonDataTransparentTemplate.setBERTLV(berTLV);
+BERTLV berTLV = new BERTLV();
+berTLV.SetDataIssuerApplicationData("06010A03000000");
+berTLV.SetDataApplicationCryptogram("584FD385FA234BCC");
+berTLV.SetDataApplicationTransactionCounter("0001");
+berTLV.SetDataUnpredictableNumber("6D58EF13");
+commonDataTransparentTemplate.SetBERTLV(berTLV);
 
-commonDataTemplate.addCommonDataTransparentTemplate(commonDataTransparentTemplate);
+commonDataTemplate.AddCommonAppTemplate(commonDataTransparentTemplate);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `commonDataTransparentTemplate` | A common data transparent template | **CommonDataTransparentTemplate** |
 
-###### format
+###### Format
 
 ```
-commonDataTemplate.format();
+commonDataTemplate.Format();
 ```
 
 
@@ -1702,11 +1702,11 @@ commonDataTemplate.format();
 ###### DataWithType
 
 ```
-const binaryFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
+string binaryFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
 
-const rawFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
+string rawFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Raw Data
 ```
 
 | Parameters | Description | Type |
@@ -1718,23 +1718,23 @@ const rawFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW, 
 | ------ | ------ |
 | `string` | Common data transparent template in binary OR raw data format |
 
-#### EMVQR
+#### ConsumerEMVQR
 
 Represents an EMV QRCode.
 
 ```
-const { Consumer } = require('steplix-emv-qrcps');
-const { MerchantConsts } = Consumer;
+using emv_qrcps.QrCode.Consumer;
+using emv_qrcps.QrCode.Merchant;
 
-const emvqr = Consumer.buildEMVQR();
+ConsumerEMVQR emvqr = new ConsumerEMVQR();
 ```
 
 ##### Methods
 
-###### setDataPayloadFormatIndicator
+###### SetDataPayloadFormatIndicator
 
 ```
-emvqr.setDataPayloadFormatIndicator("CPV01");
+emvqr.SetDataPayloadFormatIndicator("CPV01");
 ```
 
 
@@ -1742,84 +1742,84 @@ emvqr.setDataPayloadFormatIndicator("CPV01");
 | ------ | ------ | ------ |
 | `dataPayloadFormatIndicator` | Payload Format Indicator | **string** |
 
-###### addApplicationTemplate
+###### AddApplicationTemplate (Replaced by AddCommonAppTemplate)
 
 ```
-const applicationTemplate1 = Consumer.buildApplicationTemplate();
-const berTLV1 = Consumer.buildBERTLV();
-berTLV1.setDataApplicationDefinitionFileName("A0000000555555");
-berTLV1.setDataApplicationLabel("Product1");
-applicationTemplate1.setBERTLV(berTLV1);
+ApplicationTemplate applicationTemplate1 = new ApplicationTemplate();
+BERTLV berTLV1 = new BERTLV();
+berTLV1.SetDataApplicationDefinitionFileName("A0000000555555");
+berTLV1.SetDataApplicationLabel("Product1");
+applicationTemplate1.SetBERTLV(berTLV1);
 
-emvqr.addApplicationTemplate(applicationTemplate1);
+emvqr.AddCommonAppTemplate(applicationTemplate1);
 
-const applicationTemplate2 = Consumer.buildApplicationTemplate();
-const berTLV2 = Consumer.buildBERTLV();
-berTLV2.setDataApplicationDefinitionFileName("A0000000666666");
-berTLV2.setDataApplicationLabel("Product2");
-applicationTemplate2.setBERTLV(berTLV2);
+ApplicationTemplate applicationTemplate2 = new ApplicationTemplate();
+BERTLV berTLV2 = new BERTLV();
+berTLV2.SetDataApplicationDefinitionFileName("A0000000666666");
+berTLV2.SetDataApplicationLabel("Product2");
+applicationTemplate2.SetBERTLV(berTLV2);
 
-emvqr.addApplicationTemplate(applicationTemplate2);
+emvqr.AddCommonAppTemplate(applicationTemplate2);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `applicationTemplate` | An application template | **ApplicationTemplate** |
 
-###### addCommonDataTemplate
+###### AddCommonDataTemplate (Replaced by AddCommonAppTemplate)
 
 ```
-const commonDataTemplate = Consumer.buildCommonDataTemplate();
+CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 
-const berTLV1 = Consumer.buildBERTLV();
-berTLV1.setDataApplicationPAN("1234567890123458");
-berTLV1.setDataCardholderName("CARDHOLDER/EMV");
-berTLV1.setDataLanguagePreference("ruesdeen");
-commonDataTemplate.setBERTLV(berTLV1);
+BERTLV berTLV1 = new BERTLV();
+berTLV1.SetDataApplicationPAN("1234567890123458");
+berTLV1.SetDataCardholderName("CARDHOLDER/EMV");
+berTLV1.SetDataLanguagePreference("ruesdeen");
+commonDataTemplate.SetBERTLV(berTLV1);
 
-const commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
+CommonDataTemplate commonDataTransparentTemplate = Consumer.buildCommonDataTransparentTemplate();
 
-const berTLV2 = Consumer.buildBERTLV();
-berTLV2.setDataIssuerApplicationData("06010A03000000");
-berTLV2.setDataApplicationCryptogram("584FD385FA234BCC");
-berTLV2.setDataApplicationTransactionCounter("0001");
-berTLV2.setDataUnpredictableNumber("6D58EF13");
-commonDataTransparentTemplate.setBERTLV(berTLV2);
+BERTLV berTLV2 = new BERTLV();
+berTLV2.SetDataIssuerApplicationData("06010A03000000");
+berTLV2.SetDataApplicationCryptogram("584FD385FA234BCC");
+berTLV2.SetDataApplicationTransactionCounter("0001");
+berTLV2.SetDataUnpredictableNumber("6D58EF13");
+commonDataTransparentTemplate.SetBERTLV(berTLV2);
 
-commonDataTemplate.addCommonDataTransparentTemplate(commonDataTransparentTemplate);
+commonDataTemplate.AddCommonAppTemplate(commonDataTransparentTemplate);
 
-emvqr.addCommonDataTemplate(commonDataTemplate);
+emvqr.AddCommonAppTemplate(commonDataTemplate);
 ```
 
 | Parameters | Description | Type |
 | ------ | ------ | ------ |
 | `commonDataTemplate` | A common data template | **CommonDataTemplate** |
 
-###### generatePayload
+###### GeneratePayload
 
 ```
-commonDataTemplate.generatePayload();
+commonDataTemplate.GeneratePayload();
 ```
 
 
 | Return Type | Description |
 | ------ | ------ |
-| `string` | EMVQR in base64 string format |
+| `string` | ConsumerEMVQR in base64 string format |
 
 ###### ToBinary
 
 ```
-const emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
+string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 ```
 
 | Return Type | Description |
 | ------ | ------ |
 | `string` | EMV QRCode in binary format |
 
-###### rawData
+###### RawData
 
 ```
-const emvqrBinaryFormat = emvqr.rawData(); // Raw Data
+string emvqrBinaryFormat = emvqr.rawData(); // Raw Data
 ```
 
 | Return Type | Description |
