@@ -16,7 +16,7 @@ There are 2 modules in this library.
 
 You can use this Module by importing:
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 ```
 
@@ -24,7 +24,7 @@ using emv_qrcps.QrCode.Merchant;
 
 #### TLV
 
-```
+```csharp
 TLV tlv = new TLV(tag, length, value);
 ```
 
@@ -38,7 +38,7 @@ TLV tlv = new TLV(tag, length, value);
 
 #### MerchantEMVQR
 
-```
+```csharp
 MerchantEMVQR emvqr = new MerchantEMVQR();
 
 // ... OR
@@ -93,7 +93,7 @@ MerchantEMVQR emvq = new MerchantEMVQR()
 
 #### AdditionalDataFieldTemplate
 
-```
+```csharp
 AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
 
 // ... OR
@@ -134,7 +134,7 @@ AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFiel
 
 #### MerchantInformationLanguageTemplate
 
-```
+```csharp
 MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
 
 // ... OR
@@ -161,7 +161,7 @@ MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new Me
 
 #### MerchantAccountInformation
 
-```
+```csharp
 MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
 
 // ... OR
@@ -183,7 +183,7 @@ MerchantAccountInformation merchantAccountInformation = new MerchantAccountInfor
 
 #### UnreservedTemplate
 
-```
+```csharp
 UnreservedTemplate unreservedTemplate =  new UnreservedTemplate();
 
 // ... OR
@@ -211,7 +211,7 @@ UnreservedTemplate unreservedTemplate =  new UnreservedTemplate
 
 Represents a **TAG** + **Length** + **Value**.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 string tag = "01";
@@ -225,7 +225,7 @@ TLV tlv = new TLV(tag, length, value);
 
 ###### ToString
 
-```
+```csharp
 string tlvStringFormat = TLV.ToString();
 ```
 
@@ -236,7 +236,7 @@ string tlvStringFormat = TLV.ToString();
 
 ###### DataWithType
 
-```
+```csharp
 string tlvBinaryFormat = TLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -257,7 +257,7 @@ string tlvRawFormat = TLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); // Ra
 
 Represents a merchant account information.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
@@ -267,7 +267,7 @@ MerchantAccountInformation merchantAccountInformation = new MerchantAccountInfor
 
 ###### ToString
 
-```
+```csharp
 string merchantAccountInformationStringFormat = merchantAccountInformation.ToString();
 ```
 
@@ -278,7 +278,7 @@ string merchantAccountInformationStringFormat = merchantAccountInformation.ToStr
 
 ###### DataWithType
 
-```
+```csharp
 string merchantAccountInformationBinaryFormat = merchantAccountInformation.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -297,7 +297,7 @@ string merchantAccountInformationRawFormat = merchantAccountInformation.DataWith
 
 ###### SetGloballyUniqueIdentifier
 
-```
+```csharp
 string value = "15600000000";
 
 merchantAccountInformation.SetGloballyUniqueIdentifier(value);
@@ -309,7 +309,7 @@ merchantAccountInformation.SetGloballyUniqueIdentifier(value);
 
 ###### AddPaymentNetworkSpecific ( Replaced by AddContextSpecificData)
 
-```
+```csharp
 string id = "03";
 string value = "12345678";
 
@@ -326,7 +326,7 @@ merchantAccountInformation.AddContextSpecificData(id, value);
 
 Represents a merchant information language template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
@@ -336,7 +336,7 @@ MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new Me
 
 ###### ToString
 
-```
+```csharp
 string merchantInformationLanguageTemplateStringFormat = merchantInformationLanguageTemplate.ToString();
 ```
 
@@ -347,7 +347,7 @@ string merchantInformationLanguageTemplateStringFormat = merchantInformationLang
 
 ###### DataWithType
 
-```
+```csharp
 string merchantInformationLanguageTemplateBinaryFormat = merchantInformationLanguageTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -366,7 +366,7 @@ string merchantInformationLanguageTemplateRawFormat = merchantInformationLanguag
 
 ###### Validate
 
-```
+```csharp
 bool isValid = merchantInformationLanguageTemplate.Validate();
 ```
 
@@ -376,7 +376,7 @@ bool isValid = merchantInformationLanguageTemplate.Validate();
 
 ###### SetLanguagePreference
 
-```
+```csharp
 string value = "PT";
 
 merchantInformationLanguageTemplate.SetLanguagePreference(value);
@@ -388,7 +388,7 @@ merchantInformationLanguageTemplate.SetLanguagePreference(value);
 
 ###### SetMerchantName
 
-```
+```csharp
 string value = "Merchant Organization";
 
 merchantInformationLanguageTemplate.SetMerchantName(value);
@@ -400,7 +400,7 @@ merchantInformationLanguageTemplate.SetMerchantName(value);
 
 ###### SetMerchantCity
 
-```
+```csharp
 string value = "Brasilia";
 
 merchantInformationLanguageTemplate.SetMerchantCity(value);
@@ -412,7 +412,7 @@ merchantInformationLanguageTemplate.SetMerchantCity(value);
 
 ###### AddRFUforEMVCo
 
-```
+```csharp
 string id = "03";
 string value = "12345678";
 
@@ -428,7 +428,7 @@ merchantInformationLanguageTemplate.AddRFUforEMVCo(id, value);
 
 Represents a merchant account information.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 UnreservedTemplate unreservedTemplate = new UnreservedTemplate();
@@ -438,7 +438,7 @@ UnreservedTemplate unreservedTemplate = new UnreservedTemplate();
 
 ###### ToString
 
-```
+```csharp
 string unreservedTemplateStringFormat = unreservedTemplate.ToString();
 ```
 
@@ -449,7 +449,7 @@ string unreservedTemplateStringFormat = unreservedTemplate.ToString();
 
 ###### DataWithType
 
-```
+```csharp
 string unreservedTemplateBinaryFormat = unreservedTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -468,7 +468,7 @@ string unreservedTemplateRawFormat = unreservedTemplate.DataWithType(MerchantCon
 
 ###### SetGloballyUniqueIdentifier
 
-```
+```csharp
 string value = "15600000000";
 
 unreservedTemplate.SetGloballyUniqueIdentifier(value);
@@ -480,7 +480,7 @@ unreservedTemplate.SetGloballyUniqueIdentifier(value);
 
 ###### AddContextSpecificData
 
-```
+```csharp
 const id = "03";
 const value = "12345678";
 
@@ -496,7 +496,7 @@ unreservedTemplate.AddContextSpecificData(id, value);
 
 Represents a payment system specific.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 PaymentSystemSpecific paymentSystemSpecific = new PaymentSystemSpecific();
@@ -506,7 +506,7 @@ PaymentSystemSpecific paymentSystemSpecific = new PaymentSystemSpecific();
 
 ###### ToString
 
-```
+```csharp
 string paymentSystemSpecificStringFormat = paymentSystemSpecific.ToString();
 ```
 
@@ -517,7 +517,7 @@ string paymentSystemSpecificStringFormat = paymentSystemSpecific.ToString();
 
 ###### DataWithType
 
-```
+```csharp
 string paymentSystemSpecificBinaryFormat = paymentSystemSpecific.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -536,7 +536,7 @@ string paymentSystemSpecificRawFormat = paymentSystemSpecific.DataWithType(Merch
 
 ###### SetGloballyUniqueIdentifier
 
-```
+```csharp
 string value = "15600000000";
 
 paymentSystemSpecific.SetGloballyUniqueIdentifier(value);
@@ -548,7 +548,7 @@ paymentSystemSpecific.SetGloballyUniqueIdentifier(value);
 
 ###### AddPaymentSystemSpecific ( Replaced by AddContextSpecificData)
 
-```
+```csharp
 string id = "03";
 string value = "12345678";
 
@@ -564,7 +564,7 @@ paymentSystemSpecific.AddContextSpecificData(id, value);
 
 Represents an additional data field template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
@@ -574,7 +574,7 @@ AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFiel
 
 ###### ToString
 
-```
+```csharp
 string additionalDataFieldTemplateStringFormat = additionalDataFieldTemplate.ToString();
 ```
 
@@ -585,7 +585,7 @@ string additionalDataFieldTemplateStringFormat = additionalDataFieldTemplate.ToS
 
 ###### DataWithType
 
-```
+```csharp
 string additionalDataFieldTemplateBinaryFormat = additionalDataFieldTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -604,7 +604,7 @@ string additionalDataFieldTemplateRawFormat = additionalDataFieldTemplate.DataWi
 
 ###### SetBillNumber
 
-```
+```csharp
 string value = "34250";
 
 additionalDataFieldTemplate.SetBillNumber(value);
@@ -617,7 +617,7 @@ additionalDataFieldTemplate.SetBillNumber(value);
 
 ###### SetMobileNumber
 
-```
+```csharp
 string value = "+5561991112222";
 
 additionalDataFieldTemplate.SetMobileNumber(value);
@@ -630,7 +630,7 @@ additionalDataFieldTemplate.SetMobileNumber(value);
 
 ###### SetStoreLabel
 
-```
+```csharp
 string value = "1234";
 
 additionalDataFieldTemplate.SetStoreLabel(value);
@@ -643,7 +643,7 @@ additionalDataFieldTemplate.SetStoreLabel(value);
 
 ###### SetLoyaltyNumber
 
-```
+```csharp
 string value = "12345";
 
 additionalDataFieldTemplate.SetLoyaltyNumber(value);
@@ -656,7 +656,7 @@ additionalDataFieldTemplate.SetLoyaltyNumber(value);
 
 ###### SetReferenceLabel
 
-```
+```csharp
 string value = "example";
 
 additionalDataFieldTemplate.SetReferenceLabel(value);
@@ -669,7 +669,7 @@ additionalDataFieldTemplate.SetReferenceLabel(value);
 
 ###### SetCustomerLabel
 
-```
+```csharp
 string value = "***";
 
 additionalDataFieldTemplate.SetCustomerLabel(value);
@@ -682,7 +682,7 @@ additionalDataFieldTemplate.SetCustomerLabel(value);
 
 ###### SetTerminalLabel
 
-```
+```csharp
 string value = "A6008667";
 
 additionalDataFieldTemplate.SetTerminalLabel(value);
@@ -695,7 +695,7 @@ additionalDataFieldTemplate.SetTerminalLabel(value);
 
 ###### SetPurposeTransaction
 
-```
+```csharp
 string value = "Some purpose";
 
 additionalDataFieldTemplate.SetPurposeTransaction(value);
@@ -708,7 +708,7 @@ additionalDataFieldTemplate.SetPurposeTransaction(value);
 
 ###### SetAdditionalConsumerDataRequest
 
-```
+```csharp
 string value = "ME";
 
 additionalDataFieldTemplate.SetAdditionalConsumerDataRequest(value);
@@ -720,7 +720,7 @@ additionalDataFieldTemplate.SetAdditionalConsumerDataRequest(value);
 
 ###### AddRFUforEMVCo
 
-```
+```csharp
 string id = "03";
 string value = "12345678";
 
@@ -734,7 +734,7 @@ additionalDataFieldTemplate.AddRFUforEMVCo(id, value);
 
 ###### AddPaymentSystemSpecific ( Replaced by AddContextSpecificData)
 
-```
+```csharp
 string id = "03";
 string value = new PaymentSystemSpecific();
 value.SetGloballyUniqueIdentifier("15600000000");
@@ -752,7 +752,7 @@ additionalDataFieldTemplate.AddContextSpecificData(id, value);
 
 Represents an EMV QRCode.
 
-```
+```csharp
 using emv_qrcps.QrCode.Merchant;
 
 string emvqr = new MerchantEMVQR();
@@ -762,7 +762,7 @@ string emvqr = new MerchantEMVQR();
 
 ###### GeneratePayload
 
-```
+```csharp
 string emvqrStringFormat = emvqr.GeneratePayload();
 ```
 
@@ -773,7 +773,7 @@ string emvqrStringFormat = emvqr.GeneratePayload();
 
 ###### DataWithType
 
-```
+```csharp
 string emvqrBinaryFormat = emvqr.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -792,7 +792,7 @@ string emvqrRawFormat = emvqr.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' '); /
 
 ###### ToBinary
 
-```
+```csharp
 string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 ```
 
@@ -802,7 +802,7 @@ string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 
 ###### RawData
 
-```
+```csharp
 string emvqrBinaryFormat = emvqr.RawData(); // Raw Data
 ```
 
@@ -812,7 +812,7 @@ string emvqrBinaryFormat = emvqr.RawData(); // Raw Data
 
 ###### Validate
 
-```
+```csharp
 bool isValid = emvqr.Validate();
 ```
 
@@ -822,7 +822,7 @@ bool isValid = emvqr.Validate();
 
 ###### SetPayloadFormatIndicator
 
-```
+```csharp
 string value = "01";
 
 emvqr.SetPayloadFormatIndicator(value);
@@ -835,7 +835,7 @@ emvqr.SetPayloadFormatIndicator(value);
 
 ###### SetPointOfInitiationMethod
 
-```
+```csharp
 string value = "00";
 
 emvqr.setPointOfInitiationMethod(value);
@@ -848,7 +848,7 @@ emvqr.setPointOfInitiationMethod(value);
 
 ###### SetMerchantCategoryCode
 
-```
+```csharp
 string value = "Technology";
 
 emvqr.setMerchantCategoryCode(value);
@@ -861,7 +861,7 @@ emvqr.setMerchantCategoryCode(value);
 
 ###### SetTransactionCurrency
 
-```
+```csharp
 string value = "BRL";
 
 emvqr.SetTransactionCurrency(value);
@@ -874,7 +874,7 @@ emvqr.SetTransactionCurrency(value);
 
 ###### SetTransactionAmount
 
-```
+```csharp
 string value = "20.5";
 
 emvqr.SetTransactionAmount(value);
@@ -887,7 +887,7 @@ emvqr.SetTransactionAmount(value);
 
 ###### SetTipOrConvenienceIndicator
 
-```
+```csharp
 string value = "2";
 
 emvqr.SetTipOrConvenienceIndicator(value);
@@ -900,7 +900,7 @@ emvqr.SetTipOrConvenienceIndicator(value);
 
 ###### SetValueOfConvenienceFeeFixed
 
-```
+```csharp
 string value = "2.00";
 
 emvqr.SetValueOfConvenienceFeeFixed(value);
@@ -913,7 +913,7 @@ emvqr.SetValueOfConvenienceFeeFixed(value);
 
 ###### SetValueOfConvenienceFeePercentage
 
-```
+```csharp
 string value = "0.90";
 
 emvqr.SetValueOfConvenienceFeePercentage(value);
@@ -926,7 +926,7 @@ emvqr.SetValueOfConvenienceFeePercentage(value);
 
 ###### SetCountryCode
 
-```
+```csharp
 string value = "55";
 
 emvqr.SetCountryCode(value);
@@ -938,7 +938,7 @@ emvqr.SetCountryCode(value);
 
 ###### SetMerchantName
 
-```
+```csharp
 string value = "Merchant Organization";
 
 emvqr.SetMerchantName(value);
@@ -950,7 +950,7 @@ emvqr.SetMerchantName(value);
 
 ###### SetMerchantCity
 
-```
+```csharp
 string value = "Brasilia";
 
 emvqr.SetMerchantCity(value);
@@ -962,7 +962,7 @@ emvqr.SetMerchantCity(value);
 
 ###### SetPostalCode
 
-```
+```csharp
 string value = "71715-000";
 
 emvqr.SetPostalCode(value);
@@ -974,7 +974,7 @@ emvqr.SetPostalCode(value);
 
 ###### SetCRC
 
-```
+```csharp
 string value = "AF35";
 
 emvqr.SetCRC(value);
@@ -986,7 +986,7 @@ emvqr.SetCRC(value);
 
 ###### SetAdditionalDataFieldTemplate
 
-```
+```csharp
 AdditionalDataFieldTemplate additionalDataFieldTemplate = new AdditionalDataFieldTemplate();
 additionalDataFieldTemplate.SetStoreLabel("1234");
 additionalDataFieldTemplate.SetCustomerLabel("***");
@@ -1002,7 +1002,7 @@ emvqr.SetAdditionalDataFieldTemplate(additionalDataFieldTemplate);
 
 ###### SetMerchantInformationLanguageTemplate
 
-```
+```csharp
 MerchantInformationLanguageTemplate merchantInformationLanguageTemplate = new MerchantInformationLanguageTemplate();
 merchantInformationLanguageTemplate.SetLanguagePreference("PT");
 merchantInformationLanguageTemplate.SetMerchantName("Merchant Organization");
@@ -1016,7 +1016,7 @@ emvqr.SetMerchantInformationLanguageTemplate(merchantInformationLanguageTemplate
 
 ###### AddMerchantAccountInformation
 
-```
+```csharp
 string id = "27";
 
 MerchantAccountInformation merchantAccountInformation = new MerchantAccountInformation();
@@ -1036,7 +1036,7 @@ emvqr.AddMerchantAccountInformation(id, merchantAccountInformation);
 
 ###### AddUnreservedTemplates
 
-```
+```csharp
 string id = "80";
 
 string unreservedTemplate = new UnreservedTemplate();
@@ -1053,7 +1053,7 @@ emvqr.AddUnreservedTemplates(id, unreservedTemplate);
 
 ###### AddRFUforEMVCo
 
-```
+```csharp
 string id = "03";
 string value = "12345678";
 
@@ -1070,7 +1070,7 @@ emvqr.AddRFUforEMVCo(id, value);
 
 You can use this Module by importing:
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 ```
 
@@ -1078,7 +1078,7 @@ using emv_qrcps.QrCode.Consumer;
 
 #### BERTLV
 
-```
+```csharp
 BERTLV berTLV = new BERTLV();
 
 // ... OR
@@ -1127,7 +1127,7 @@ BERTLV berTLV = new BERTLV(
 
 #### ApplicationSpecificTransparentTemplate
 
-```
+```csharp
 ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = new ApplicationSpecificTransparentTemplate();
 
 // ... OR
@@ -1149,7 +1149,7 @@ ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = 
 
 #### ApplicationTemplate
 
-```
+```csharp
 ApplicationTemplate applicationTemplate = new ApplicationTemplate();
 
 // ... OR
@@ -1173,7 +1173,7 @@ ApplicationTemplate applicationTemplate = new ApplicationTemplate(
 
 #### CommonDataTransparentTemplate
 
-```
+```csharp
 CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTransparentTemplate();
 
 // ... OR
@@ -1194,7 +1194,7 @@ CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTran
 
 #### CommonDataTemplate
 
-```
+```csharp
 CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 
 // ... OR
@@ -1217,7 +1217,7 @@ CommonDataTemplate commonDataTemplate = new CommonDataTemplate(
 
 #### ConsumerEMVQR
 
-```
+```csharp
 ConsumerEMVQR emvqr = new ConsumerEMVQR();
 
 // ... OR
@@ -1246,7 +1246,7 @@ ConsumerEMVQR emvqr = new ConsumerEMVQR(
 
 Represents a **Basic Encoding Rules** **TAG** + **Length** + **Value**.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv-qrcps.QrCode.Merchant;
 
@@ -1257,7 +1257,7 @@ BERTLV berTLV = new BERTLV();
 
 ###### SetDataApplicationDefinitionFileName
 
-```
+```csharp
 berTLV.SetDataApplicationDefinitionFileName("A0000000555555");
 ```
 
@@ -1268,7 +1268,7 @@ berTLV.SetDataApplicationDefinitionFileName("A0000000555555");
 
 ###### SetDataApplicationLabel
 
-```
+```csharp
 berTLV.SetDataApplicationLabel("Product1");
 ```
 
@@ -1279,7 +1279,7 @@ berTLV.SetDataApplicationLabel("Product1");
 
 ###### SetDataTrack2EquivalentData
 
-```
+```csharp
 berTLV.SetDataTrack2EquivalentData("AABBCCDD");
 ```
 
@@ -1290,7 +1290,7 @@ berTLV.SetDataTrack2EquivalentData("AABBCCDD");
 
 ###### SetDataApplicationPAN
 
-```
+```csharp
 berTLV.SetDataApplicationPAN("1234567890123458");
 ```
 
@@ -1301,7 +1301,7 @@ berTLV.SetDataApplicationPAN("1234567890123458");
 
 ###### SetDataCardholderName
 
-```
+```csharp
 berTLV.SetDataCardholderName("CARDHOLDER/EMV");
 ```
 
@@ -1312,7 +1312,7 @@ berTLV.SetDataCardholderName("CARDHOLDER/EMV");
 
 ###### SetDataLanguagePreference
 
-```
+```csharp
 berTLV.SetDataLanguagePreference("ruesdeen");
 ```
 
@@ -1323,7 +1323,7 @@ berTLV.SetDataLanguagePreference("ruesdeen");
 
 ###### SetDataIssuerURL
 
-```
+```csharp
 berTLV.SetDataIssuerURL("http://someuri.com");
 ```
 
@@ -1334,7 +1334,7 @@ berTLV.SetDataIssuerURL("http://someuri.com");
 
 ###### SetDataApplicationVersionNumber
 
-```
+```csharp
 berTLV.setDataApplicationVersionNumber("04");
 ```
 
@@ -1345,7 +1345,7 @@ berTLV.setDataApplicationVersionNumber("04");
 
 ###### SetDataIssuerApplicationData
 
-```
+```csharp
 berTLV.SetDataIssuerApplicationData("06010A03000000");
 ```
 
@@ -1356,7 +1356,7 @@ berTLV.SetDataIssuerApplicationData("06010A03000000");
 
 ###### SetDataTokenRequestorID
 
-```
+```csharp
 berTLV.SetDataTokenRequestorID("0601AABBCC");
 ```
 
@@ -1367,7 +1367,7 @@ berTLV.SetDataTokenRequestorID("0601AABBCC");
 
 ###### SetDataPaymentAccountReference
 
-```
+```csharp
 berTLV.SetDataPaymentAccountReference("0708AABBCCDD");
 ```
 
@@ -1378,7 +1378,7 @@ berTLV.SetDataPaymentAccountReference("0708AABBCCDD");
 
 ###### SetDataLast4DigitsOfPAN
 
-```
+```csharp
 berTLV.SetDataLast4DigitsOfPAN("07080201");
 ```
 
@@ -1389,7 +1389,7 @@ berTLV.SetDataLast4DigitsOfPAN("07080201");
 
 ###### SetDataApplicationCryptogram
 
-```
+```csharp
 berTLV.SetDataApplicationCryptogram("584FD385FA234BCC");
 ```
 
@@ -1400,7 +1400,7 @@ berTLV.SetDataApplicationCryptogram("584FD385FA234BCC");
 
 ###### SetDataApplicationTransactionCounter
 
-```
+```csharp
 berTLV.SetDataApplicationTransactionCounter("0001");
 ```
 
@@ -1411,7 +1411,7 @@ berTLV.SetDataApplicationTransactionCounter("0001");
 
 ###### SetDataUnpredictableNumber
 
-```
+```csharp
 berTLV.SetDataUnpredictableNumber("6D58EF13");
 ```
 
@@ -1422,7 +1422,7 @@ berTLV.SetDataUnpredictableNumber("6D58EF13");
 
 ###### Format
 
-```
+```csharp
 berTLV.Format();
 ```
 
@@ -1433,7 +1433,7 @@ berTLV.Format();
 
 ###### DataWithType
 
-```
+```csharp
 string berTlvBinaryFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -1454,7 +1454,7 @@ string berTlvRawFormat = berTLV.DataWithType(MerchantConsts.DATA_TYPE.RAW, ' ');
 
 Represents an application specific transparent template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv_qrcps.QrCode.Merchant;
 
@@ -1465,7 +1465,7 @@ ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = 
 
 ###### SetBERTLV
 
-```
+```csharp
 BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
@@ -1480,7 +1480,7 @@ applicationSpecificTransparentTemplate.SetBERTLV(berTLV);
 
 ###### format
 
-```
+```csharp
 applicationSpecificTransparentTemplate.Format();
 ```
 
@@ -1491,7 +1491,7 @@ applicationSpecificTransparentTemplate.Format();
 
 ###### DataWithType
 
-```
+```csharp
 string binaryFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -1512,7 +1512,7 @@ string rawFormat = applicationSpecificTransparentTemplate.DataWithType(MerchantC
 
 Represents a common data transparent template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv_qrcps.QrCode.Merchant;
 
@@ -1523,7 +1523,7 @@ CommonDataTransparentTemplate commonDataTransparentTemplate = new CommonDataTran
 
 ###### SetBERTLV
 
-```
+```csharp
 BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
@@ -1538,7 +1538,7 @@ commonDataTransparentTemplate.SetBERTLV(berTLV);
 
 ###### Format
 
-```
+```csharp
 commonDataTransparentTemplate.Format();
 ```
 
@@ -1549,7 +1549,7 @@ commonDataTransparentTemplate.Format();
 
 ###### DataWithType
 
-```
+```csharp
 string binaryFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -1570,7 +1570,7 @@ string rawFormat = commonDataTransparentTemplate.DataWithType(MerchantConsts.DAT
 
 Represents an application template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv_qrcps.QrCode.Merchant;
 
@@ -1581,7 +1581,7 @@ ApplicationTemplate applicationTemplate = new ApplicationTemplate();
 
 ###### SetBERTLV
 
-```
+```csharp
 BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
@@ -1596,7 +1596,7 @@ applicationTemplate.SetBERTLV(berTLV);
 
 ###### AddApplicationSpecificTransparentTemplate
 
-```
+```csharp
 ApplicationSpecificTransparentTemplate applicationSpecificTransparentTemplate = Consumer.buildApplicationSpecificTransparentTemplate();
 
 BERTLV berTLV1 = new BERTLV();
@@ -1613,7 +1613,7 @@ applicationTemplate.AddApplicationSpecificTransparentTemplate(applicationSpecifi
 
 ###### format
 
-```
+```csharp
 applicationTemplate.Format();
 ```
 
@@ -1624,7 +1624,7 @@ applicationTemplate.Format();
 
 ###### DataWithType
 
-```
+```csharp
 string binaryFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -1645,7 +1645,7 @@ string rawFormat = applicationTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW
 
 Represents a common data template.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv_qrcps.QrCode.Merchant;
 
@@ -1656,7 +1656,7 @@ CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 
 ###### SetBERTLV
 
-```
+```csharp
 BERTLV berTLV = new BERTLV();
 
 // Setters assignments in berTLV
@@ -1671,7 +1671,7 @@ commonDataTemplate.SetBERTLV(berTLV);
 
 ###### AddCommonDataTransparentTemplate (Replaced by AddCommonAppTemplate)
 
-```
+```csharp
 CommonDataTransparentTemplate commonDataTransparentTemplate = new ommonDataTransparentTemplate();
 
 BERTLV berTLV = new BERTLV();
@@ -1690,7 +1690,7 @@ commonDataTemplate.AddCommonAppTemplate(commonDataTransparentTemplate);
 
 ###### Format
 
-```
+```csharp
 commonDataTemplate.Format();
 ```
 
@@ -1701,7 +1701,7 @@ commonDataTemplate.Format();
 
 ###### DataWithType
 
-```
+```csharp
 string binaryFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.BINARY, ' '); // Binary Data (shown as hex bytes)
 
 // OR
@@ -1722,7 +1722,7 @@ string rawFormat = commonDataTemplate.DataWithType(MerchantConsts.DATA_TYPE.RAW,
 
 Represents an EMV QRCode.
 
-```
+```csharp
 using emv_qrcps.QrCode.Consumer;
 using emv_qrcps.QrCode.Merchant;
 
@@ -1733,7 +1733,7 @@ ConsumerEMVQR emvqr = new ConsumerEMVQR();
 
 ###### SetDataPayloadFormatIndicator
 
-```
+```csharp
 emvqr.SetDataPayloadFormatIndicator("CPV01");
 ```
 
@@ -1744,7 +1744,7 @@ emvqr.SetDataPayloadFormatIndicator("CPV01");
 
 ###### AddApplicationTemplate (Replaced by AddCommonAppTemplate)
 
-```
+```csharp
 ApplicationTemplate applicationTemplate1 = new ApplicationTemplate();
 BERTLV berTLV1 = new BERTLV();
 berTLV1.SetDataApplicationDefinitionFileName("A0000000555555");
@@ -1768,7 +1768,7 @@ emvqr.AddCommonAppTemplate(applicationTemplate2);
 
 ###### AddCommonDataTemplate (Replaced by AddCommonAppTemplate)
 
-```
+```csharp
 CommonDataTemplate commonDataTemplate = new CommonDataTemplate();
 
 BERTLV berTLV1 = new BERTLV();
@@ -1797,7 +1797,7 @@ emvqr.AddCommonAppTemplate(commonDataTemplate);
 
 ###### GeneratePayload
 
-```
+```csharp
 commonDataTemplate.GeneratePayload();
 ```
 
@@ -1808,7 +1808,7 @@ commonDataTemplate.GeneratePayload();
 
 ###### ToBinary
 
-```
+```csharp
 string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 ```
 
@@ -1818,7 +1818,7 @@ string emvqrBinaryFormat = emvqr.ToBinary(); // Binary Data (shown as hex bytes)
 
 ###### RawData
 
-```
+```csharp
 string emvqrBinaryFormat = emvqr.rawData(); // Raw Data
 ```
 
