@@ -4,20 +4,20 @@ using static emv_qrcps.QrCode.Consumer.ConsumerConsts;
 
 namespace emv_qrcps.QrCode.Consumer
 {
-    public class EMVQR : Template
+    public class ConsumerEMVQR : Template
     {
         private string dataPayloadFormatIndicator;
         private AppTemplate[] applicationTemplates;
         private CommonTemplate[] commonDataTemplates;
 
-        public EMVQR(string dataPayloadFormatIndicator, AppTemplate[] applicationTemplates, CommonTemplate[] commonDataTemplates)
+        public ConsumerEMVQR(string dataPayloadFormatIndicator, AppTemplate[] applicationTemplates, CommonTemplate[] commonDataTemplates)
         {
             this.dataPayloadFormatIndicator = dataPayloadFormatIndicator;
             this.applicationTemplates = applicationTemplates;
             this.commonDataTemplates = commonDataTemplates;
         }
 
-        public EMVQR()
+        public ConsumerEMVQR()
         {
             this.dataPayloadFormatIndicator = string.Empty;
             this.applicationTemplates = new AppTemplate[] { };

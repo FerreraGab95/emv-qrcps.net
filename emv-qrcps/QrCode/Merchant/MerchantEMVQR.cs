@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace emv_qrcps.QrCode.Merchant
 {
-    public class EMVQR : Template
+    public class MerchantEMVQR : Template
     {
         private TLV payloadFormatIndicator;
         private TLV pointOfInitiationMethod;
@@ -26,7 +26,7 @@ namespace emv_qrcps.QrCode.Merchant
         private Dictionary<string, Template> unreservedTemplates;
 
 
-        public EMVQR()
+        public MerchantEMVQR()
         {
             payloadFormatIndicator = new TLV(MerchantConsts.ID.IDPayloadFormatIndicator, string.Empty.Length, string.Empty);
             pointOfInitiationMethod = new TLV(MerchantConsts.ID.IDPointOfInitiationMethod, string.Empty.Length, string.Empty);
@@ -49,7 +49,7 @@ namespace emv_qrcps.QrCode.Merchant
         }
 
 
-        public EMVQR(TLV payloadFormatIndicator, TLV pointOfInitiationMethod, Dictionary<string, Template> merchantAccountInformation, 
+        public MerchantEMVQR(TLV payloadFormatIndicator, TLV pointOfInitiationMethod, Dictionary<string, Template> merchantAccountInformation, 
             TLV merchantCategoryCode, TLV transactionCurrency, TLV transactionAmount, TLV tipOrConvenienceIndicator, 
             TLV valueOfConvenienceFeeFixed, TLV valueOfConvenienceFeePercentage, TLV countryCode, TLV merchantName, 
             TLV merchantCity, TLV postalCode, AdditionalDataFieldTemplate additionalDataFieldTemplate, TLV crc,

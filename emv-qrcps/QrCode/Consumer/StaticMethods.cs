@@ -61,7 +61,7 @@ namespace emv_qrcps.QrCode.Consumer
                 {
                     string REGEX_PATTERN = "(.{2})";
                     var regex = new Regex(REGEX_PATTERN);
-                    string[] hexArray = Regex.Matches(value, REGEX_PATTERN).Select(x => x.Value).ToArray();
+                    string[] hexArray = Regex.Matches(value, REGEX_PATTERN).Cast<Match>().Select(x => x.Value).ToArray();
 
                     return indent + string.Join(" ", hexArray) + "\r\n";
                 }

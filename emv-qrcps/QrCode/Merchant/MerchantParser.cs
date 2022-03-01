@@ -192,9 +192,9 @@ namespace emv_qrcps.QrCode.Merchant
         }
 
 
-        public static EMVQR ToEMVQR(string qrcodeValue)
+        public static MerchantEMVQR ToEMVQR(string qrcodeValue)
         {
-            var emvqr = new EMVQR();
+            var emvqr = new MerchantEMVQR();
 
             TLV[] tags = buildTags(qrcodeValue);
 

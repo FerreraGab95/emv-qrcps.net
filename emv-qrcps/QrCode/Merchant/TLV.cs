@@ -37,7 +37,7 @@ namespace emv_qrcps.QrCode.Merchant
 
         private string _sLength;
 
-        internal TLV(string tag, int length, string value)
+        public TLV(string tag, int length, string value)
         {
             this.tag = tag;
             this.length = length;
@@ -56,7 +56,7 @@ namespace emv_qrcps.QrCode.Merchant
                         Convert.ToInt32(c)))).ToUpper(); //Método Original Buffer.from(value).toString('hex').toUpperCase();
 
                     var hexMatch = Regex.Matches(hexStr, REGEX_PATTERN);
-                    string[] hexArray = Regex.Matches(hexStr, REGEX_PATTERN).Select(x => x.Value).ToArray();
+                    string[] hexArray = Regex.Matches(hexStr, REGEX_PATTERN).Cast<Match>().Select(x => x.Value).ToArray();
 
                     hexArray = hexArray == null ? new string[] { } : hexArray;
 
